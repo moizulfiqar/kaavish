@@ -15,22 +15,32 @@
 \usepackage{tabularx}  % more control over table column width
 \usepackage{titlesec}  % customize chapter title 
 \usepackage{upquote}  % prevent mishandling of single quotes in listings
+\usepackage{subcaption} % for subfigures
+\usepackage{float}
+\usepackage{amsmath}   % math environments and \text command
+\usepackage[T1]{fontenc}  % proper font encoding for special characters in listings
+\usepackage{svg}  % for including SVG images
+\usepackage{fancyhdr}  % custom headers and footers
 
-
-% TODO: Customize the appearance of hyperref links using \hypersetup
-% See https://en.wikibooks.org/wiki/LaTeX/Hyperlinks#Customization
+% SVG package configuration
+% \svgsetup{inkscapearea=math, inkscapetext=0} % Causing errors, commented out
 
 % Custom format of chapter title.
 \titleformat{\chapter}[hang]{\bf\huge}{\thechapter.}{2pc}{}
 
 % Separate folder for images named 'images'.
-\graphicspath{ {images/} }
+\graphicspath{ {./} {images/} {figures/} }
+
+% Fancyhdr setup for footer on all pages
+\fancyhf{} % clear all headers and footers
+\fancyfoot[R]{\thepage}
+\fancyfoot[L]{\Title}
 
 % Separate file for references
 \addbibresource{references.bib}
 
 % Replace with your title
-\title{Chhoti Si Kaavish}
+\title{Automated Shelf Monitoring System}
 
 % Allow recalling document title
 % from https://tex.stackexchange.com/a/15806/44301
@@ -41,19 +51,46 @@
 \include{titlepage}  % title page.
 \include{approval}  % approval page.
 
+\chapter*{Draft Note}
+
+This is a draft version of the report. The final version will be updated with additional details, figures, and results as the project progresses through real-time testing and product finalization.
+
 \chapter*{Dedication}
-For ammi, abbu, and pappu.
+
+\textit{For our parents,} \\
+who supported us in every way possible, just so we could stand here today. Every late night we spent, you spent worrying. Everything we have done in our lives was built on the foundation you laid. This is as much yours as it is ours.\\[1em]
+\\
+\textit{For our friends,} \\
+who made this entire journey bearable, for the laughter between and after deadlines, the moral support during breakdowns, and for simply being there during the good times and the bad.\\[1em]
+\\
+\textit{For all our teachers and mentors,} \\
+who pushed us beyond what we thought was possible, who challenged us to think critically and creatively, and who provided us with the tools and knowledge to build something meaningful. We are grateful for the guidance and support you have given us throughout our academic journey.\\[1em]
+\\
+\textit{And for this incredible team,} \\
+for the countless hours of hard work, the dedication to excellence, and the persistence in the face of many challenges. This project would not have been possible without each other's support, encouragement, and collaboration. 
+We started this journey unsure of where it would lead, and we are proud of say we finished it.
 
 \chapter*{Acknowledgements}
-We want to thank the CS faculty and ...
+
+We would like to express our sincere gratitude to our internal supervisor, \textbf{Sir Abdul Samad}, for his consistent guidance and support during the development of this project. His technical advice and feedback on system design and evaluation helped shape the final solution.
+\\
+We are also very grateful to our external supervisor, \textbf{Fahad Badar}, Head of AI and Digitisation at Multinet. His real-world insights into retail challenges and automation priorities were essential for aligning the project with industry needs.
+\\
+We would like to thank the faculty of the Computer Science department at Habib University for providing the academic foundation for this project. Their teaching, mentorship, and encouragement prepared us to tackle a practical research problem grounded in retail operations and computer vision.
+\\
+Finally, we thank our friends and colleagues for their support, for reviewing our ideas, and for motivating us throughout the project.
 
 \chapter*{Abstract}
-Abstract goes here
+
+Retail stores currently rely on workers to manually inspect shelves, identify low-stock items, and replenish inventory. This process is time-consuming, labor-intensive, and prone to errors, which can lead to stockouts and lost sales.
+\\
+The Automated Shelf Monitoring System for Retail Stores is a computer vision solution that uses cameras and machine learning to monitor shelf occupancy in real time. The system detects products, tracks stock levels, identifies empty or understocked locations, and sends automated alerts to store staff when restocking is needed.
+\\
+The project combines object detection, image segmentation, and inventory analytics to provide a practical retail monitoring workflow. It was designed for a pilot deployment scenario with Multinet, and its performance was evaluated using precision, recall, and occupancy accuracy metrics on a retail shelf dataset.
 
 % The following are automatically populated by LaTeX \chapter, \section and related, \figure, and \table.
+\pagestyle{fancy}
 \tableofcontents
-\listoffigures
-\listoftables
 
 \chapter{Introduction}
 \label{chap:intro}
@@ -71,7 +108,7 @@ Abstract goes here
 \label{chap:sds}
 \input{chapters/sds}
 
-\chapter{Methodology, Experiments and Results OR Testing and Analysis}
+\chapter{Methodology, Experiments and Results}
 \label{chap:results}
 \input{chapters/results}
 
@@ -83,25 +120,27 @@ Abstract goes here
 \label{chap:Reflection}
 \input{chapters/reflection}
 
-\begin{appendices}
+\chapter*{To Be Added}
 
-\titleformat{\chapter}[hang]{\bf\huge}{Appendix \thechapter.}{2pc}{}
-  
-% This appendix is optional.
-\chapter{More Math}
-\input{chapters/appendix-math}
+This section outlines the content that is planned to be added to the report at a later date to complete the documentation:
 
-% This appendix is required if the data set is not fully described in the main text.
-\chapter{Data}
-\input{chapters/appendix-data}
-
-% This appendix is required if the code is not fully described in the main text.
-\chapter{Code}
-\input{chapters/appendix-code}
-\end{appendices}
-
-% Print the bibliography with a ToC entry and titled, "References".
-\printbibliography[heading=bibintoc,title={References}]
+\begin{itemize}
+    \item \textbf{Dataset Pictures:} Sample images from the three dataset phases (Initial products, Tapal Cafeteria chips rack, and Multinet-funded custom shelf) to visually illustrate the data collection process and diversity.
+    \item \textbf{Model Results:} Detailed performance metrics, confusion matrices, training curves, and comparison charts for the YOLO-based detector across different evaluation scenarios.
+    \item \textbf{Literature Review Figures:} Diagrams, flowcharts, or tables summarizing the reviewed computer vision techniques for shelf monitoring, including comparisons of existing systems and methodologies.
+    \item \textbf{Frontend Dashboard Pics:} Screenshots of the user interface for the monitoring dashboard, showing real-time occupancy displays, alert notifications, and administrative controls.
+    \item \textbf{Workflow Diagrams:} Visual representations of the system workflow, including data flow, processing pipelines, and user interaction sequences.
+    \item \textbf{Additional Missing Elements:}
+    \begin{itemize}
+        \item Code snippets or pseudocode for key algorithms (e.g., object detection pipeline, alert system logic).
+        \item Detailed hardware/software requirements and deployment architecture diagrams.
+        \item User testing results or feedback from pilot deployments.
+        \item Expanded discussion on ethical considerations, data privacy, and scalability challenges.
+        \item Full bibliography with cited references (currently removed but planned for inclusion).
+        \item Appendices with raw data, additional results tables, or supplementary materials (previously removed but may be reinstated if needed).
+        \item Other details to be added and finalized as the final product is finalized after real-time testing.
+    \end{itemize}
+\end{itemize}
 
 \end{document}
 
